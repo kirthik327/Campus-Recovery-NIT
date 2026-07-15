@@ -30,7 +30,7 @@ export default function Home() {
   const [aiLoading, setAiLoading] = useState(false);
 
   // Dynamic backends & animation observers
-  const BACKEND_URL = `http://${window.location.hostname}:5000`;
+  const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || `http://${window.location.hostname}:5000`;
   const searchRef = useScrollAnimate();
   const gridRef = useScrollAnimate();
   const heroRef = useScrollAnimate();

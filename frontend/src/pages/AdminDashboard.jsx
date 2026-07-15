@@ -14,7 +14,7 @@ export default function AdminDashboard() {
   const [loading, setLoading] = useState(true);
   const [activeTab, setActiveTab] = useState('queue'); // 'queue', 'claims', 'analytics'
   const [actionLoading, setActionLoading] = useState(false);
-  const BACKEND_URL = `http://${window.location.hostname}:5000`;
+  const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || `http://${window.location.hostname}:5000`;
 
   const fetchAdminData = async () => {
     setLoading(true);

@@ -62,7 +62,7 @@ export default function ReportItem() {
     setPreviews([]);
   };
 
-  const BACKEND_URL = `http://${window.location.hostname}:5000`;
+  const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || `http://${window.location.hostname}:5000`;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
