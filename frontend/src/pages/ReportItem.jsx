@@ -62,6 +62,8 @@ export default function ReportItem() {
     setPreviews([]);
   };
 
+  const BACKEND_URL = `http://${window.location.hostname}:5000`;
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!title || !category || !location || !date) {
@@ -88,7 +90,7 @@ export default function ReportItem() {
 
       // Explicitly set authorization token for file uploads in options
       const token = localStorage.getItem('token');
-      const res = await fetch('http://localhost:5000/api/items', {
+      const res = await fetch(`${BACKEND_URL}/api/items`, {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`

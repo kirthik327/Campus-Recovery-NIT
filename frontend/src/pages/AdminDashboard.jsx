@@ -14,6 +14,7 @@ export default function AdminDashboard() {
   const [loading, setLoading] = useState(true);
   const [activeTab, setActiveTab] = useState('queue'); // 'queue', 'claims', 'analytics'
   const [actionLoading, setActionLoading] = useState(false);
+  const BACKEND_URL = `http://${window.location.hostname}:5000`;
 
   const fetchAdminData = async () => {
     setLoading(true);
@@ -217,7 +218,7 @@ export default function AdminDashboard() {
                           <tr key={itemId}>
                             <td>
                               {item.images && item.images.length > 0 ? (
-                                <img src={`http://localhost:5000${item.images[0]}`} alt={item.title} style={{ width: '45px', height: '45px', objectFit: 'cover', borderRadius: '6px' }} />
+                                <img src={`${BACKEND_URL}${item.images[0]}`} alt={item.title} style={{ width: '45px', height: '45px', objectFit: 'cover', borderRadius: '6px' }} />
                               ) : (
                                 <span style={{ color: 'var(--text-dark)' }}>No Photo</span>
                               )}
