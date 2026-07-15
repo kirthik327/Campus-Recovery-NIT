@@ -1,0 +1,25 @@
+# Dependencies
+node_modules/
+/frontend/node_modules/
+/backend/node_modules/
+
+# Production builds
+dist/
+/frontend/dist/
+
+# Secret credentials
+.env
+/backend/.env
+
+# Local python environments
+.venv/
+venv/
+__pycache__/
+*.pyc
+
+# Local uploads and system logs
+/backend/uploads/*
+!/backend/uploads/.gitkeep
+*.log
+.DS_Store
+Thumbs.db

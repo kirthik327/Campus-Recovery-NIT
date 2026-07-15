@@ -1,0 +1,95 @@
+{
+  "users": [
+    {
+      "_id": "4cc8e6dc-782d-48b0-a77a-886ac778cc3e",
+      "createdAt": "2026-07-14T09:17:05.420Z",
+      "role": "admin",
+      "contact": "+91 99999 88888",
+      "username": "Office Admin",
+      "email": "admin@college.edu",
+      "password": "$2a$10$btb.TjcLQksqBAB8zP1Dz.iqY5711yLheNkeP5l5g9WTjs8pLNg4i",
+      "department": "Office Management",
+      "year": "N/A"
+    },
+    {
+      "_id": "7df12f63-f56e-4b76-bdc7-a91b06132aeb",
+      "createdAt": "2026-07-14T09:17:05.501Z",
+      "role": "student",
+      "contact": "+91 98765 43210",
+      "username": "Aarav Sharma",
+      "email": "aarav@college.edu",
+      "password": "$2a$10$8ziAnYC7.XTfgFjxFIkujOqIGIkuNzEnmK/Yj/ZKWwNfgsUJxyvei",
+      "department": "Computer Science & Engineering",
+      "year": "3rd Year"
+    },
+    {
+      "_id": "73716e03-6254-4558-8b36-5dcdfda3f01f",
+      "createdAt": "2026-07-14T09:17:05.581Z",
+      "role": "student",
+      "contact": "+91 98888 77777",
+      "username": "Priya Patel",
+      "email": "priya@college.edu",
+      "password": "$2a$10$SmsmFIZbqcmMVBezoJX3ueU51nEhGkDC5dzxLqXAdkufJB.Ot9Gdi",
+      "department": "Electrical Engineering",
+      "year": "2nd Year"
+    },
+    {
+      "_id": "fe395b27-88bc-42b1-948e-b141ae3d7569",
+      "createdAt": "2026-07-14T09:20:03.023Z",
+      "role": "student",
+      "contact": "",
+      "username": "kirthik",
+      "email": "kirthikofficial327@gmail.com",
+      "password": "$2a$10$gNia6FXCFfubDwNr/nhEy.Y7GABAmayBp9kJYWhYq5huToPgSqamG",
+      "department": "",
+      "year": "1st Year",
+      "registerNumber": "721023205032"
+    },
+    {
+      "_id": "9a7205b1-3c3f-43d1-bebe-b1e03b56d648",
+      "createdAt": "2026-07-14T10:09:27.989Z",
+      "role": "student",
+      "contact": "",
+      "username": "dhachanamoorthi",
+      "email": "dhachu123@gmail.com",
+      "password": "$2a$10$d8ZJHzSvZ9j1tYHFkis7gupW3mOI4CzuGaLpu68CYGbDgJHNbnI/G",
+      "department": "Information Technology",
+      "year": "4th Year"
+    },
+    {
+      "_id": "58ba8115-f2fc-4dcd-8fd2-94fb1e3a9dd3",
+      "createdAt": "2026-07-15T06:42:53.040Z",
+      "role": "student",
+      "contact": "",
+      "username": "abc",
+      "email": "abc@gmail.com",
+      "password": "$2a$10$qZ0e0DhbvkNiijN8hSJG.u15nOT9HZ78L6OMpMoVLvpLRfECCUcmK",
+      "registerNumber": "721023205081",
+      "department": "it",
+      "year": "4th Year"
+    }
+  ],
+  "items": [
+    {
+      "_id": "984a17fb-a79e-4efc-96a7-c298734e06b9",
+      "status": "approved",
+      "images": [
+        "/uploads/images-1784097696221-179023288.jpeg"
+      ],
+      "ocrText": "Label: Images 1784097696221 179023288\nCampus University Property",
+      "qrCode": "",
+      "claimedBy": null,
+      "claimCount": 0,
+      "createdAt": "2026-07-15T06:41:36.239Z",
+      "type": "lost",
+      "title": "mobile",
+      "category": "Electronics",
+      "description": "iq 15r (white colour)\r\n",
+      "location": "canteen",
+      "date": "2026-07-15",
+      "reportedBy": "kirthik"
+    }
+  ],
+  "claims": [],
+  "notifications": []
+}
