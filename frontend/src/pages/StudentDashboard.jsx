@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
-import { FileQuestion, ShieldCheck, Clock, Award, CheckCircle2, ChevronRight, RefreshCw, Eye, User } from 'lucide-react';
+import { FileQuestion, ShieldCheck, Clock, Award, CheckCircle2, ChevronRight, RefreshCw, Eye, User, Trash2 } from 'lucide-react';
 
 export default function StudentDashboard() {
   const { authFetch, user, updateProfile } = useAuth();
@@ -98,6 +98,27 @@ export default function StudentDashboard() {
     }
   };
 
+  const handleDeleteItem = async (itemId) => {
+    if (!window.confirm('Are you sure you want to delete this reported item? This action cannot be undone.')) {
+      return;
+    }
+
+    try {
+      const res = await authFetch(`/items/${itemId}`, {
+        method: 'DELETE'
+      });
+      if (res.ok) {
+        fetchDashboardData();
+      } else {
+        const data = await res.json();
+        alert(data.message || 'Failed to delete item.');
+      }
+    } catch (err) {
+      console.error('Error deleting item:', err);
+      alert('Connection error deleting item.');
+    }
+  };
+
   useEffect(() => {
     fetchDashboardData();
   }, []);
@@ -158,6 +179,7 @@ export default function StudentDashboard() {
                         <th>Type</th>
                         <th>Location & Date</th>
                         <th>Status</th>
+                        <th>Actions</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -177,6 +199,16 @@ export default function StudentDashboard() {
                             <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>{item.date}</div>
                           </td>
                           <td>{getStatusBadge(item.status)}</td>
+                          <td>
+                            <button 
+                              onClick={() => handleDeleteItem(item._id || item.id)} 
+                              className="btn btn-outline btn-sm" 
+                              style={{ padding: '6px', color: 'var(--lost)', borderColor: 'rgba(239, 68, 68, 0.2)', minWidth: 'auto' }}
+                              title="Delete reported item"
+                            >
+                              <Trash2 size={14} />
+                            </button>
+                          </td>
                         </tr>
                       ))}
                     </tbody>

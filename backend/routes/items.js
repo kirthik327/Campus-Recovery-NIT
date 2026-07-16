@@ -277,9 +277,19 @@ router.put('/:id/return', verifyAdmin, async (req, res) => {
   }
 });
 
-// Delete an Item (Admin only)
-router.delete('/:id', verifyAdmin, async (req, res) => {
+// Delete an Item (Admin or Original Reporter only)
+router.delete('/:id', verifyToken, async (req, res) => {
   try {
+    const item = await db.items.findById(req.params.id);
+    if (!item) {
+      return res.status(404).json({ message: 'Item not found.' });
+    }
+
+    // Permission check: admin OR original reporter
+    if (req.user.role !== 'admin' && item.reportedBy !== req.user.username) {
+      return res.status(403).json({ message: 'Unauthorized to delete this item.' });
+    }
+
     const result = await db.items.deleteOne({ _id: req.params.id });
     if (result.deletedCount === 0) {
       return res.status(404).json({ message: 'Item not found.' });
