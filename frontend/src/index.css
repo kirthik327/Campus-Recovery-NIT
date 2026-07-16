@@ -1342,9 +1342,10 @@ tr:hover td {
   }
   .auth-3d-container {
     height: 240px;
+    touch-action: pan-y !important;
   }
   .auth-3d-container spline-viewer {
-    pointer-events: none !important; /* Disable mobile touch drag rotation so pages scroll smoothly */
+    touch-action: pan-y !important; /* Allow swipe up/down to scroll the page, while retaining horizontal robot rotation responses */
   }
   .auth-3d-side h3 {
     font-size: 1.1rem !important;

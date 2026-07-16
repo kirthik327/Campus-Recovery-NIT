@@ -69,6 +69,7 @@ export default function Register() {
           <div style={{ position: 'absolute', width: '220px', height: '220px', background: 'var(--secondary)', filter: 'blur(100px)', opacity: 0.16, borderRadius: '50%', zIndex: 1, pointerEvents: 'none' }} />
           <div className="auth-3d-container">
             <spline-viewer 
+              events-target="global"
               url="https://prod.spline.design/PyzDhpQ9E5f1E3MT/scene.splinecode" 
               style={{ width: '100%', height: '100%', display: 'block' }}
             />
