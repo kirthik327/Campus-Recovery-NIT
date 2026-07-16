@@ -3,7 +3,10 @@ import { useAuth } from '../context/AuthContext';
 import { MessageSquare, X, Send, Bot, RefreshCw, AlertCircle } from 'lucide-react';
 
 export default function Chatbot() {
-  const { authFetch } = useAuth();
+  const { authFetch, user } = useAuth();
+  
+  if (!user) return null;
+
   const [isOpen, setIsOpen] = useState(false);
   const [input, setInput] = useState('');
   const [messages, setMessages] = useState([
