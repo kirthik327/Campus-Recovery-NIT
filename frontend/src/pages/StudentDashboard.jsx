@@ -144,7 +144,7 @@ export default function StudentDashboard() {
 
   return (
     <div className="app-container animate-fade-in" style={{ margin: '20px auto' }}>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '32px' }}>
+      <div className="dashboard-header">
         <div>
           <h1 style={{ fontSize: '2rem' }}>Student Recovery Dashboard</h1>
           <p style={{ color: 'var(--text-muted)' }}>Hello, {user?.username}. Track reported items and manage your claim ownership requests.</p>
