@@ -119,23 +119,23 @@ export default function Navbar() {
           <div className="navbar-menu">
              <NavLink to="/" className={({ isActive }) => `nav-link ${isActive ? 'nav-link-active' : ''}`}>
                <Search size={18} />
-               <span>Lost & Found</span>
+               <span className="nav-text">Lost & Found</span>
              </NavLink>
              
              <NavLink to="/report" className={({ isActive }) => `nav-link nav-link-highlight ${isActive ? 'nav-link-highlight-active' : ''}`}>
                <PlusCircle size={18} />
-               <span>Report Item</span>
+               <span className="nav-text">Report Item</span>
              </NavLink>
  
              <NavLink to="/dashboard" className={({ isActive }) => `nav-link ${isActive ? 'nav-link-active' : ''}`}>
                <LayoutDashboard size={18} />
-               <span>Dashboard</span>
+               <span className="nav-text">Dashboard</span>
              </NavLink>
  
              {isAdmin && (
                <NavLink to="/admin" className={({ isActive }) => `nav-link admin-glow ${isActive ? 'nav-link-admin-active' : ''}`}>
                  <ShieldAlert size={18} />
-                 <span>Admin Panel</span>
+                 <span className="nav-text">Admin Panel</span>
                </NavLink>
              )}
 

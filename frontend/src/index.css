@@ -1343,6 +1343,9 @@ tr:hover td {
   .auth-3d-container {
     height: 240px;
   }
+  .auth-3d-container spline-viewer {
+    pointer-events: none !important; /* Disable mobile touch drag rotation so pages scroll smoothly */
+  }
   .auth-3d-side h3 {
     font-size: 1.1rem !important;
     margin-top: 8px !important;
@@ -1350,5 +1353,50 @@ tr:hover td {
   .auth-3d-side p {
     font-size: 0.78rem !important;
     max-width: 260px !important;
+  }
+}
+
+/* Global Mobile Responsiveness Safeguards */
+html, body {
+  overflow-x: hidden;
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    width: 100% !important;
+    max-width: 100% !important;
+    border-radius: 0 !important;
+    top: 0 !important;
+    margin: 0 !important;
+    border-left: none !important;
+    border-right: none !important;
+    border-top: none !important;
+    height: 60px !important;
+  }
+  .navbar-container {
+    padding: 0 12px !important;
+  }
+  .navbar-brand {
+    font-size: 1.05rem !important;
+  }
+  .navbar-menu {
+    gap: 8px !important;
+  }
+  .nav-link {
+    padding: 8px 10px !important;
+  }
+  .nav-text {
+    display: none !important; /* Hide text on mobile to avoid squishing links */
+  }
+  .username {
+    display: none !important; /* Hide username text on mobile avatar link */
+  }
+  .navbar-auth-buttons {
+    gap: 6px !important;
+  }
+  .navbar-auth-buttons .btn {
+    padding: 6px 10px !important;
+    font-size: 0.76rem !important;
   }
 }
