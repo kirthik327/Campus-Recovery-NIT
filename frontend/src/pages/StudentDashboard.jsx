@@ -336,29 +336,29 @@ export default function StudentDashboard() {
                 </form>
               ) : (
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid rgba(255,255,255,0.03)', paddingBottom: '6px' }}>
-                    <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>Name</span>
-                    <strong style={{ fontSize: '0.85rem' }}>{user?.username}</strong>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '16px', borderBottom: '1px solid rgba(255,255,255,0.03)', paddingBottom: '6px' }}>
+                    <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)', flexShrink: 0 }}>Name</span>
+                    <strong style={{ fontSize: '0.85rem', textAlign: 'right', wordBreak: 'break-word', minWidth: 0, flexShrink: 1 }}>{user?.username}</strong>
                   </div>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid rgba(255,255,255,0.03)', paddingBottom: '6px' }}>
-                    <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>Register Number</span>
-                    <strong style={{ fontSize: '0.85rem', color: 'var(--secondary)' }}>{user?.registerNumber || 'N/A'}</strong>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '16px', borderBottom: '1px solid rgba(255,255,255,0.03)', paddingBottom: '6px' }}>
+                    <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)', flexShrink: 0 }}>Register Number</span>
+                    <strong style={{ fontSize: '0.85rem', color: 'var(--secondary)', textAlign: 'right', wordBreak: 'break-word', minWidth: 0, flexShrink: 1 }}>{user?.registerNumber || 'N/A'}</strong>
                   </div>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid rgba(255,255,255,0.03)', paddingBottom: '6px' }}>
-                    <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>Department</span>
-                    <strong style={{ fontSize: '0.85rem' }}>{user?.department || 'N/A'}</strong>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '16px', borderBottom: '1px solid rgba(255,255,255,0.03)', paddingBottom: '6px' }}>
+                    <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)', flexShrink: 0 }}>Department</span>
+                    <strong style={{ fontSize: '0.85rem', textAlign: 'right', wordBreak: 'break-word', minWidth: 0, flexShrink: 1 }}>{user?.department || 'N/A'}</strong>
                   </div>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid rgba(255,255,255,0.03)', paddingBottom: '6px' }}>
-                    <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>Year of Study</span>
-                    <strong style={{ fontSize: '0.85rem' }}>{user?.year || 'N/A'}</strong>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '16px', borderBottom: '1px solid rgba(255,255,255,0.03)', paddingBottom: '6px' }}>
+                    <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)', flexShrink: 0 }}>Year of Study</span>
+                    <strong style={{ fontSize: '0.85rem', textAlign: 'right', wordBreak: 'break-word', minWidth: 0, flexShrink: 1 }}>{user?.year || 'N/A'}</strong>
                   </div>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid rgba(255,255,255,0.03)', paddingBottom: '6px' }}>
-                    <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>College Email</span>
-                    <strong style={{ fontSize: '0.85rem' }}>{user?.email}</strong>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '16px', borderBottom: '1px solid rgba(255,255,255,0.03)', paddingBottom: '6px' }}>
+                    <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)', flexShrink: 0 }}>College Email</span>
+                    <strong style={{ fontSize: '0.85rem', textAlign: 'right', wordBreak: 'break-word', minWidth: 0, flexShrink: 1 }}>{user?.email}</strong>
                   </div>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid rgba(255,255,255,0.03)', paddingBottom: '6px' }}>
-                    <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>Mobile Number</span>
-                    <strong style={{ fontSize: '0.85rem' }}>{user?.contact || 'N/A'}</strong>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '16px', borderBottom: '1px solid rgba(255,255,255,0.03)', paddingBottom: '6px' }}>
+                    <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)', flexShrink: 0 }}>Mobile Number</span>
+                    <strong style={{ fontSize: '0.85rem', textAlign: 'right', wordBreak: 'break-word', minWidth: 0, flexShrink: 1 }}>{user?.contact || 'N/A'}</strong>
                   </div>
 
                   <button className="btn btn-outline btn-sm" style={{ marginTop: '8px', width: '100%' }} onClick={() => setIsEditingProfile(true)}>
