@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { UserPlus, User, Mail, Key, Phone, ShieldCheck } from 'lucide-react';
+import { UserPlus, User, Mail, Key, Phone, ShieldCheck, ArrowLeft } from 'lucide-react';
 
 export default function Register() {
   const { register } = useAuth();
@@ -15,26 +15,62 @@ export default function Register() {
   const [year, setYear] = useState('1st Year');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
-  const [scrollY, setScrollY] = useState(0);
-  const [isFocused, setIsFocused] = useState(false);
-  const [isMobile, setIsMobile] = useState(window.innerWidth < 800);
+  const [activePage, setActivePage] = useState(1); // 1 = Robot Splash, 2 = Register Form
 
+  // Swipe gesture & wheel scrolling detections
   useEffect(() => {
-    const handleScroll = () => {
-      setScrollY(window.scrollY);
-    };
-    const handleResize = () => {
-      setIsMobile(window.innerWidth < 800);
+    let touchStartY = 0;
+    let touchStartX = 0;
+
+    const handleTouchStart = (e) => {
+      touchStartY = e.touches[0].clientY;
+      touchStartX = e.touches[0].clientX;
     };
 
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    window.addEventListener('resize', handleResize);
+    const handleTouchEnd = (e) => {
+      const touchEndY = e.changedTouches[0].clientY;
+      const touchEndX = e.changedTouches[0].clientX;
+      const diffY = touchStartY - touchEndY;
+      const diffX = touchStartX - touchEndX;
+
+      // Swipe Up (diffY > 50) -> Go to registration form
+      // Swipe Down (diffY < -50) -> Go back to robot splash
+      if (Math.abs(diffY) > 50 && Math.abs(diffY) > Math.abs(diffX)) {
+        if (diffY > 0 && activePage === 1) {
+          setActivePage(2);
+        } else if (diffY < 0 && activePage === 2) {
+          // Do not swipe back up if user is focusing an input or select field
+          const activeEl = document.activeElement;
+          if (activeEl && (activeEl.tagName === 'INPUT' || activeEl.tagName === 'TEXTAREA' || activeEl.tagName === 'SELECT')) {
+            return;
+          }
+          setActivePage(1);
+        }
+      }
+    };
+
+    const handleWheel = (e) => {
+      if (e.deltaY > 15 && activePage === 1) {
+        setActivePage(2);
+      } else if (e.deltaY < -15 && activePage === 2) {
+        const activeEl = document.activeElement;
+        if (activeEl && (activeEl.tagName === 'INPUT' || activeEl.tagName === 'TEXTAREA' || activeEl.tagName === 'SELECT')) {
+          return;
+        }
+        setActivePage(1);
+      }
+    };
+
+    window.addEventListener('touchstart', handleTouchStart, { passive: true });
+    window.addEventListener('touchend', handleTouchEnd, { passive: true });
+    window.addEventListener('wheel', handleWheel, { passive: true });
 
     return () => {
-      window.removeEventListener('scroll', handleScroll);
-      window.removeEventListener('resize', handleResize);
+      window.removeEventListener('touchstart', handleTouchStart);
+      window.removeEventListener('touchend', handleTouchEnd);
+      window.removeEventListener('wheel', handleWheel);
     };
-  }, []);
+  }, [activePage]);
 
   // Hide Spline watermark logo from shadow DOM
   useEffect(() => {
@@ -81,37 +117,40 @@ export default function Register() {
     }
   };
 
-  const isCollapsed = isMobile && (scrollY > 50 || isFocused);
-
   return (
-    <div className="auth-container">
-      <div className="auth-grid">
-        {/* 3D Robot side */}
-        <div className={`auth-3d-side ${isCollapsed ? 'collapsed' : ''}`}>
-          <div style={{ position: 'absolute', width: '220px', height: '220px', background: 'var(--secondary)', filter: 'blur(100px)', opacity: 0.16, borderRadius: '50%', zIndex: 1, pointerEvents: 'none' }} />
-          <div className="auth-3d-container">
-            <spline-viewer 
-              events-target="global"
-              url="https://prod.spline.design/PyzDhpQ9E5f1E3MT/scene.splinecode" 
-              style={{ width: '100%', height: '100%', display: 'block' }}
-            />
-          </div>
-          <h3 className="glow-text" style={{ fontSize: '1.25rem', fontWeight: '800', marginTop: '16px', color: 'var(--secondary)' }}>
-            Join Campus Recovery
-          </h3>
-          <p style={{ color: 'var(--text-muted)', fontSize: '0.85rem', textAlign: 'center', maxWidth: '320px', marginTop: '6px', lineHeight: '1.4' }}>
-            Enter your student details and let our 3D custodian secure your reports.
-          </p>
-          {isMobile && !isCollapsed && (
-            <div className="scroll-indicator" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '2px', marginTop: '8px', color: 'var(--secondary)', fontSize: '0.78rem', fontWeight: '700' }}>
-              <span>Swipe down to register</span>
-              <span>↓</span>
-            </div>
-          )}
+    <div className="auth-page-wrapper">
+      {/* PAGE 1: Dynamic 3D Robot Splash Page */}
+      <div className={`auth-splash-page ${activePage === 1 ? 'active' : 'inactive'}`}>
+        <div style={{ position: 'absolute', width: '260px', height: '260px', background: 'var(--secondary)', filter: 'blur(110px)', opacity: 0.18, borderRadius: '50%', zIndex: 1, pointerEvents: 'none' }} />
+        
+        <div className="auth-splash-robot-container">
+          <spline-viewer 
+            events-target="global"
+            url="https://prod.spline.design/PyzDhpQ9E5f1E3MT/scene.splinecode" 
+          />
         </div>
 
-        {/* Register form side */}
-        <div className="glass-card auth-card animate-fade-in" style={{ margin: 0, width: '100%' }}>
+        <h3 className="glow-text" style={{ fontSize: '1.45rem', fontWeight: '800', marginTop: '12px', color: 'var(--secondary)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+          Join Campus Recovery
+        </h3>
+        <p style={{ color: 'var(--text-muted)', fontSize: '0.88rem', textAlign: 'center', maxWidth: '340px', marginTop: '6px', lineHeight: '1.4' }}>
+          Enter your student details and let our 3D custodian secure your reports.
+        </p>
+
+        <div className="scroll-indicator" onClick={() => setActivePage(2)} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '4px', marginTop: '24px', color: 'var(--secondary)', fontSize: '0.82rem', fontWeight: '700', cursor: 'pointer' }}>
+          <span>Swipe Up or click to Register</span>
+          <span style={{ fontSize: '1.35rem' }}>↓</span>
+        </div>
+      </div>
+
+      {/* PAGE 2: Sliding Registration Form Page */}
+      <div className={`auth-form-page ${activePage === 2 ? 'active' : 'inactive'}`} style={{ overflowY: 'auto' }}>
+        <button className="back-to-splash-btn" onClick={() => setActivePage(1)}>
+          <ArrowLeft size={16} />
+          Back to AI Guardian
+        </button>
+
+        <div className="glass-card auth-card" style={{ margin: '80px 0 40px 0', width: '100%', maxWidth: '440px' }}>
           <div className="auth-header">
             <h2>Create Account</h2>
             <p>Register as a student to access the recovery portal</p>
@@ -135,8 +174,6 @@ export default function Register() {
                   placeholder="Aarav Sharma"
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}
-                  onFocus={() => setIsFocused(true)}
-                  onBlur={() => setIsFocused(false)}
                   required
                 />
               </div>
@@ -153,8 +190,6 @@ export default function Register() {
                   placeholder="student@college.edu"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  onFocus={() => setIsFocused(true)}
-                  onBlur={() => setIsFocused(false)}
                   required
                 />
               </div>
@@ -171,8 +206,6 @@ export default function Register() {
                   placeholder="e.g. 721021104001 (Must start with 7210)"
                   value={registerNumber}
                   onChange={(e) => setRegisterNumber(e.target.value)}
-                  onFocus={() => setIsFocused(true)}
-                  onBlur={() => setIsFocused(false)}
                   required
                 />
               </div>
@@ -186,8 +219,6 @@ export default function Register() {
                 placeholder="e.g. Computer Science, Mechanical, Physics"
                 value={department}
                 onChange={(e) => setDepartment(e.target.value)}
-                onFocus={() => setIsFocused(true)}
-                onBlur={() => setIsFocused(false)}
                 required
               />
             </div>
@@ -198,8 +229,6 @@ export default function Register() {
                 className="form-input" 
                 value={year} 
                 onChange={(e) => setYear(e.target.value)}
-                onFocus={() => setIsFocused(true)}
-                onBlur={() => setIsFocused(false)}
                 required
               >
                 <option value="1st Year">1st Year</option>
@@ -222,14 +251,12 @@ export default function Register() {
                   placeholder="Min 6 characters"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  onFocus={() => setIsFocused(true)}
-                  onBlur={() => setIsFocused(false)}
                   required
                 />
               </div>
             </div>
 
-            <div className="form-group" style={{ marginBottom: '30px' }}>
+            <div className="form-group">
               <label className="form-label">Mobile Number (for Claim Updates)</label>
               <div style={{ position: 'relative' }}>
                 <Phone size={16} style={{ position: 'absolute', left: '16px', top: '16px', color: 'var(--text-dark)' }} />
@@ -240,8 +267,6 @@ export default function Register() {
                   placeholder="+91 98765 43210"
                   value={contact}
                   onChange={(e) => setContact(e.target.value)}
-                  onFocus={() => setIsFocused(true)}
-                  onBlur={() => setIsFocused(false)}
                 />
               </div>
             </div>

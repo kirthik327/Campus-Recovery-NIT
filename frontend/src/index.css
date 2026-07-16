@@ -1423,3 +1423,101 @@ html, body {
 .scroll-indicator {
   animation: bounce 1.6s infinite ease-in-out;
 }
+
+/* Auth Cinematic Page Slider Layout */
+.auth-page-wrapper {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+.auth-splash-page {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 30px;
+  z-index: 10;
+  transition: transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.8s ease;
+}
+.auth-splash-page.inactive {
+  transform: translateX(-100%) rotate(-10deg) scale(0.9);
+  opacity: 0;
+  pointer-events: none;
+}
+.auth-form-page {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 30px;
+  z-index: 5;
+  transition: transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.8s ease;
+}
+.auth-form-page.inactive {
+  transform: translateX(100%) rotate(10deg) scale(0.9);
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Auth 3D Container inside Splash Page */
+.auth-splash-robot-container {
+  width: 100%;
+  max-width: 480px;
+  height: 60vh;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.auth-splash-robot-container spline-viewer {
+  width: 100%;
+  height: 100%;
+  display: block;
+  touch-action: pan-y !important;
+}
+
+.back-to-splash-btn {
+  position: absolute;
+  top: 24px;
+  left: 24px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  padding: 8px 16px;
+  border-radius: 12px;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  z-index: 20;
+  transition: all 0.3s ease;
+}
+.back-to-splash-btn:hover {
+  color: var(--text-main);
+  border-color: var(--primary);
+  transform: translateX(-4px);
+}
+
+@media (max-width: 768px) {
+  .back-to-splash-btn {
+    top: 76px; /* Place below mobile navbar */
+    left: 16px;
+    padding: 6px 12px;
+    font-size: 0.78rem;
+  }
+  .auth-splash-robot-container {
+    height: 52vh;
+  }
+}
