@@ -1341,11 +1341,14 @@ tr:hover td {
     margin-bottom: 10px;
   }
   .auth-3d-container {
-    height: 240px;
+    height: 260px;
     touch-action: pan-y !important;
+    overflow: visible;
   }
   .auth-3d-container spline-viewer {
     touch-action: pan-y !important; /* Allow swipe up/down to scroll the page, while retaining horizontal robot rotation responses */
+    transform: scale(0.72); /* Scale down the 3D model canvas to prevent cropping on narrow mobile screens */
+    transform-origin: center center;
   }
   .auth-3d-side h3 {
     font-size: 1.1rem !important;
