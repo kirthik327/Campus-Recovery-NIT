@@ -201,8 +201,8 @@ export default function Navbar() {
           </div>
         ) : (
           <div className="navbar-auth-buttons">
-            <Link to="/login" className="btn btn-outline btn-sm" style={{ padding: '8px 16px', fontSize: '0.85rem' }}>Login</Link>
-            <Link to="/register" className="btn btn-secondary btn-sm" style={{ padding: '8px 16px', fontSize: '0.85rem' }}>Register</Link>
+            <Link to="/login?page=form" className="btn btn-outline btn-sm" style={{ padding: '8px 16px', fontSize: '0.85rem' }}>Login</Link>
+            <Link to="/register?page=form" className="btn btn-secondary btn-sm" style={{ padding: '8px 16px', fontSize: '0.85rem' }}>Register</Link>
           </div>
         )}
       </div>

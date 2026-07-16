@@ -261,7 +261,7 @@ export default function StudentDashboard() {
           {/* Right Column: Statistics & Rules */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
             {/* College Profile Settings Card */}
-            <div className="glass-card" style={{ padding: '24px' }}>
+            <div className="glass-card">
               <h3 style={{ fontSize: '1.1rem', marginBottom: '16px', display: 'flex', alignItems: 'center', gap: '8px' }}>
                 <User size={18} style={{ color: 'var(--secondary)' }} />
                 Your Profile Details
@@ -400,7 +400,7 @@ export default function StudentDashboard() {
               )}
             </div>
 
-            <div className="glass-card" style={{ padding: '20px' }}>
+            <div className="glass-card">
               <h3 style={{ fontSize: '1rem', marginBottom: '12px' }}>Your Impact</h3>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
                 <div style={{ display: 'flex', justify: 'space-between', alignItems: 'center', background: 'rgba(255,255,255,0.02)', padding: '12px', borderRadius: '8px' }}>
@@ -416,7 +416,7 @@ export default function StudentDashboard() {
               </div>
             </div>
 
-            <div className="glass-card" style={{ padding: '20px', borderLeft: '3px solid var(--secondary)' }}>
+            <div className="glass-card" style={{ borderLeft: '3px solid var(--secondary)' }}>
               <h3 style={{ fontSize: '1rem', marginBottom: '12px', color: 'var(--secondary)' }}>Campus Verification Guide</h3>
               <ul style={{ fontSize: '0.8rem', color: 'var(--text-muted)', paddingLeft: '16px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
                 <li>Items you hand in are verified by office administrators before appearing publicly.</li>

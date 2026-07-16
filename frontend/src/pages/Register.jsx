@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { UserPlus, User, Mail, Key, Phone, ShieldCheck, ArrowLeft } from 'lucide-react';
 
 export default function Register() {
   const { register } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -16,6 +17,16 @@ export default function Register() {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const [activePage, setActivePage] = useState(1); // 1 = Robot Splash, 2 = Register Form
+
+  // Sync activePage state with URL query search parameters
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    if (params.get('page') === 'form') {
+      setActivePage(2);
+    } else {
+      setActivePage(1);
+    }
+  }, [location]);
 
   // Swipe gesture & wheel scrolling detections
   useEffect(() => {

@@ -1,16 +1,27 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { LogIn, Key, User, ShieldAlert, ArrowLeft } from 'lucide-react';
 
 export default function Login() {
   const { login } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
   const [identifier, setIdentifier] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const [activePage, setActivePage] = useState(1); // 1 = Robot Splash, 2 = Login Credentials Form
+
+  // Sync activePage state with URL query search parameters
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    if (params.get('page') === 'form') {
+      setActivePage(2);
+    } else {
+      setActivePage(1);
+    }
+  }, [location]);
 
   // Swipe gesture & wheel scrolling detections
   useEffect(() => {
