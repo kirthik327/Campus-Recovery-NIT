@@ -790,6 +790,11 @@ a:hover {
 }
 
 /* MAIN CONTAINER LAYOUT */
+main {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
 .app-container {
   max-width: 1200px;
   margin: 40px auto;
@@ -1439,6 +1444,19 @@ html, body {
     max-width: 100% !important;
     display: block !important;
     -webkit-overflow-scrolling: touch !important;
+    padding-bottom: 8px !important; /* Space for the scrollbar */
+  }
+  .table-container::-webkit-scrollbar {
+    height: 6px !important;
+    display: block !important;
+  }
+  .table-container::-webkit-scrollbar-thumb {
+    background: rgba(99, 102, 241, 0.45) !important;
+    border-radius: 10px !important;
+  }
+  .table-container::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05) !important;
+    border-radius: 10px !important;
   }
   /* Table row layout alignments */
   td, th {

@@ -158,9 +158,9 @@ export default function StudentDashboard() {
       {loading ? (
         <p>Loading your dashboard details...</p>
       ) : (
-        <div className="section-grid">
+        <div className="section-grid" style={{ width: '100%', maxWidth: '100%', overflow: 'hidden' }}>
           {/* Left Column: Reported Items & Claims */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '30px' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '30px', minWidth: 0, width: '100%', maxWidth: '100%', overflow: 'hidden' }}>
             {/* My Reported Items */}
             <div className="glass-card">
               <h2 style={{ fontSize: '1.25rem', marginBottom: '16px', display: 'flex', alignItems: 'center', gap: '8px' }}>
@@ -259,7 +259,7 @@ export default function StudentDashboard() {
           </div>
 
           {/* Right Column: Statistics & Rules */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '20px', minWidth: 0, width: '100%', maxWidth: '100%', overflow: 'hidden' }}>
             {/* College Profile Settings Card */}
             <div className="glass-card">
               <h3 style={{ fontSize: '1.1rem', marginBottom: '16px', display: 'flex', alignItems: 'center', gap: '8px' }}>
