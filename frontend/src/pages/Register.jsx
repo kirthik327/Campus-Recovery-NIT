@@ -16,6 +16,7 @@ export default function Register() {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const [scrollY, setScrollY] = useState(0);
+  const [isFocused, setIsFocused] = useState(false);
   const [isMobile, setIsMobile] = useState(window.innerWidth < 800);
 
   useEffect(() => {
@@ -80,30 +81,15 @@ export default function Register() {
     }
   };
 
-  // Mobile collapsing scroll properties
-  const fadeEnd = 120;
-  const opacity = isMobile ? Math.max(0, 1 - scrollY / fadeEnd) : 1;
-  const scale = isMobile ? 0.85 + opacity * 0.15 : 1; // subtle scale from 0.85 to 1.0
-  const translateY = isMobile ? scrollY * 0.35 : 0; // GPU accelerated parallax offset
+  const isCollapsed = isMobile && (scrollY > 50 || isFocused);
 
   return (
     <div className="auth-container">
       <div className="auth-grid">
         {/* 3D Robot side */}
-        <div 
-          className="auth-3d-side"
-          style={isMobile ? {
-            opacity: opacity,
-            transform: `translateY(${translateY}px) scale(${scale})`,
-            height: '350px',
-            minHeight: 'auto',
-            marginBottom: '10px',
-            pointerEvents: opacity < 0.15 ? 'none' : 'auto',
-            transition: 'opacity 0.05s ease-out, transform 0.05s ease-out'
-          } : {}}
-        >
+        <div className={`auth-3d-side ${isCollapsed ? 'collapsed' : ''}`}>
           <div style={{ position: 'absolute', width: '220px', height: '220px', background: 'var(--secondary)', filter: 'blur(100px)', opacity: 0.16, borderRadius: '50%', zIndex: 1, pointerEvents: 'none' }} />
-          <div className="auth-3d-container" style={isMobile ? { height: '220px' } : {}}>
+          <div className="auth-3d-container">
             <spline-viewer 
               events-target="global"
               url="https://prod.spline.design/PyzDhpQ9E5f1E3MT/scene.splinecode" 
@@ -116,7 +102,7 @@ export default function Register() {
           <p style={{ color: 'var(--text-muted)', fontSize: '0.85rem', textAlign: 'center', maxWidth: '320px', marginTop: '6px', lineHeight: '1.4' }}>
             Enter your student details and let our 3D custodian secure your reports.
           </p>
-          {isMobile && opacity > 0.8 && (
+          {isMobile && !isCollapsed && (
             <div className="scroll-indicator" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '2px', marginTop: '8px', color: 'var(--secondary)', fontSize: '0.78rem', fontWeight: '700' }}>
               <span>Swipe down to register</span>
               <span>↓</span>
@@ -149,6 +135,8 @@ export default function Register() {
                   placeholder="Aarav Sharma"
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}
+                  onFocus={() => setIsFocused(true)}
+                  onBlur={() => setIsFocused(false)}
                   required
                 />
               </div>
@@ -165,6 +153,8 @@ export default function Register() {
                   placeholder="student@college.edu"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
+                  onFocus={() => setIsFocused(true)}
+                  onBlur={() => setIsFocused(false)}
                   required
                 />
               </div>
@@ -181,6 +171,8 @@ export default function Register() {
                   placeholder="e.g. 721021104001 (Must start with 7210)"
                   value={registerNumber}
                   onChange={(e) => setRegisterNumber(e.target.value)}
+                  onFocus={() => setIsFocused(true)}
+                  onBlur={() => setIsFocused(false)}
                   required
                 />
               </div>
@@ -194,6 +186,8 @@ export default function Register() {
                 placeholder="e.g. Computer Science, Mechanical, Physics"
                 value={department}
                 onChange={(e) => setDepartment(e.target.value)}
+                onFocus={() => setIsFocused(true)}
+                onBlur={() => setIsFocused(false)}
                 required
               />
             </div>
@@ -204,6 +198,8 @@ export default function Register() {
                 className="form-input" 
                 value={year} 
                 onChange={(e) => setYear(e.target.value)}
+                onFocus={() => setIsFocused(true)}
+                onBlur={() => setIsFocused(false)}
                 required
               >
                 <option value="1st Year">1st Year</option>
@@ -226,6 +222,8 @@ export default function Register() {
                   placeholder="Min 6 characters"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
+                  onFocus={() => setIsFocused(true)}
+                  onBlur={() => setIsFocused(false)}
                   required
                 />
               </div>
@@ -242,6 +240,8 @@ export default function Register() {
                   placeholder="+91 98765 43210"
                   value={contact}
                   onChange={(e) => setContact(e.target.value)}
+                  onFocus={() => setIsFocused(true)}
+                  onBlur={() => setIsFocused(false)}
                 />
               </div>
             </div>

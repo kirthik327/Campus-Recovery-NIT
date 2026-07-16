@@ -1323,6 +1323,7 @@ tr:hover td {
   position: relative;
   width: 100%;
   min-height: 400px;
+  transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1); /* Easing transition for height & opacity collapse */
 }
 .auth-3d-container {
   z-index: 2;
@@ -1338,16 +1339,25 @@ tr:hover td {
   }
   .auth-3d-side {
     min-height: auto;
-    margin-bottom: 10px;
+    height: 280px; /* Default mobile height */
+    margin-bottom: 20px;
+    overflow: hidden; /* Ensure it collapses completely without visual overlap */
+  }
+  .auth-3d-side.collapsed {
+    height: 0px !important;
+    opacity: 0 !important;
+    margin-bottom: 0 !important;
+    transform: translateY(-20px) scale(0.9) !important;
+    pointer-events: none !important;
   }
   .auth-3d-container {
-    height: 350px; /* Taller height to give the 3D scene enough room, preventing base cropping */
+    height: 220px;
     touch-action: pan-y !important;
     overflow: visible;
   }
   .auth-3d-container spline-viewer {
     touch-action: pan-y !important; /* Allow swipe up/down to scroll the page, while retaining horizontal robot rotation responses */
-    transform: scale(1.0); /* Keep the robot large and crisp as requested */
+    transform: scale(0.68) !important; /* Scale down the robot head slightly to fit fully on narrow screens */
     transform-origin: center center;
   }
   .auth-3d-side h3 {
