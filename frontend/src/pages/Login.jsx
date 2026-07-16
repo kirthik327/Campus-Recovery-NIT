@@ -75,10 +75,10 @@ export default function Login() {
   };
 
   // Mobile collapsing scroll properties
-  const fadeEnd = 160;
+  const fadeEnd = 120;
   const opacity = isMobile ? Math.max(0, 1 - scrollY / fadeEnd) : 1;
-  const scale = isMobile ? 0.75 + opacity * 0.25 : 1; // scale from 0.75 to 1.0
-  const height = isMobile ? Math.max(0, 350 - scrollY) : 350; // starts at 350px
+  const scale = isMobile ? 0.85 + opacity * 0.15 : 1; // subtle scale from 0.85 to 1.0
+  const translateY = isMobile ? scrollY * 0.35 : 0; // GPU accelerated parallax offset
 
   return (
     <div className="auth-container">
@@ -88,16 +88,16 @@ export default function Login() {
           className="auth-3d-side"
           style={isMobile ? {
             opacity: opacity,
-            height: `${height}px`,
+            transform: `translateY(${translateY}px) scale(${scale})`,
+            height: '350px',
             minHeight: 'auto',
-            overflow: 'hidden',
-            marginBottom: opacity > 0.05 ? '20px' : '0px',
-            display: opacity > 0.05 ? 'flex' : 'none',
-            transition: 'opacity 0.1s ease-out'
+            marginBottom: '10px',
+            pointerEvents: opacity < 0.15 ? 'none' : 'auto',
+            transition: 'opacity 0.05s ease-out, transform 0.05s ease-out'
           } : {}}
         >
           <div style={{ position: 'absolute', width: '220px', height: '220px', background: 'var(--secondary)', filter: 'blur(100px)', opacity: 0.16, borderRadius: '50%', zIndex: 1, pointerEvents: 'none' }} />
-          <div className="auth-3d-container" style={isMobile ? { height: '180px', transform: `scale(${scale})`, transformOrigin: 'center center' } : {}}>
+          <div className="auth-3d-container" style={isMobile ? { height: '220px' } : {}}>
             <spline-viewer 
               events-target="global"
               url="https://prod.spline.design/PyzDhpQ9E5f1E3MT/scene.splinecode" 
