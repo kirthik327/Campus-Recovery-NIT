@@ -10,6 +10,25 @@ export default function Login() {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+  const [scrollY, setScrollY] = useState(0);
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 800);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrollY(window.scrollY);
+    };
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 800);
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
 
   // Hide Spline watermark logo from shadow DOM
   useEffect(() => {
@@ -55,13 +74,30 @@ export default function Login() {
     }
   };
 
+  // Mobile collapsing scroll properties
+  const fadeEnd = 160;
+  const opacity = isMobile ? Math.max(0, 1 - scrollY / fadeEnd) : 1;
+  const scale = isMobile ? 0.75 + opacity * 0.25 : 1; // scale from 0.75 to 1.0
+  const height = isMobile ? Math.max(0, 350 - scrollY) : 350; // starts at 350px
+
   return (
     <div className="auth-container">
       <div className="auth-grid">
         {/* 3D Robot side */}
-        <div className="auth-3d-side">
+        <div 
+          className="auth-3d-side"
+          style={isMobile ? {
+            opacity: opacity,
+            height: `${height}px`,
+            minHeight: 'auto',
+            overflow: 'hidden',
+            marginBottom: opacity > 0.05 ? '20px' : '0px',
+            display: opacity > 0.05 ? 'flex' : 'none',
+            transition: 'opacity 0.1s ease-out'
+          } : {}}
+        >
           <div style={{ position: 'absolute', width: '220px', height: '220px', background: 'var(--secondary)', filter: 'blur(100px)', opacity: 0.16, borderRadius: '50%', zIndex: 1, pointerEvents: 'none' }} />
-          <div className="auth-3d-container">
+          <div className="auth-3d-container" style={isMobile ? { height: '180px', transform: `scale(${scale})`, transformOrigin: 'center center' } : {}}>
             <spline-viewer 
               events-target="global"
               url="https://prod.spline.design/PyzDhpQ9E5f1E3MT/scene.splinecode" 
@@ -74,6 +110,12 @@ export default function Login() {
           <p style={{ color: 'var(--text-muted)', fontSize: '0.85rem', textAlign: 'center', maxWidth: '320px', marginTop: '6px', lineHeight: '1.4' }}>
             Meet our interactive helper bot. Verifying student records and protecting credentials.
           </p>
+          {isMobile && opacity > 0.8 && (
+            <div className="scroll-indicator" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '2px', marginTop: '8px', color: 'var(--secondary)', fontSize: '0.78rem', fontWeight: '700' }}>
+              <span>Swipe down to login</span>
+              <span>↓</span>
+            </div>
+          )}
         </div>
 
         {/* Login form side */}

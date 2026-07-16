@@ -1404,3 +1404,12 @@ html, body {
     font-size: 0.76rem !important;
   }
 }
+
+/* Bouncing Scroll Cue for mobile auth pages */
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(6px); }
+}
+.scroll-indicator {
+  animation: bounce 1.6s infinite ease-in-out;
+}
